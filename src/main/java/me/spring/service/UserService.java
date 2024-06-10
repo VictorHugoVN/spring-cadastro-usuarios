@@ -1,14 +1,32 @@
 package me.spring.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import me.spring.model.User;
+import me.spring.repository.UserRepository;
 
 
 @Service
 public class UserService {
 
 	@Autowired
-	UserService userService;
+	UserRepository userRepository;
+	
+	public User create(User userToCreate) {
+		var userCreated = userRepository.save(userToCreate);
+		return userCreated;
+	}
+	
+	public List<User> findAll(){
+		List<User> listUsers = userRepository.findAll();
+		if(!listUsers.isEmpty()) {
+			return listUsers;
+		}
+		return null;
+	}
 	
 	
 	
